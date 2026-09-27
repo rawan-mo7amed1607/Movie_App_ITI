@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "192916983893",
-    "project_id": "flutter-iti-b8e23",
-    "storage_bucket": "flutter-iti-b8e23.firebasestorage.app"
+    "project_number": "133482495823",
+    "project_id": "movieapp-b5f73",
+    "storage_bucket": "movieapp-b5f73.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:192916983893:android:8f27d59271b6836c0b04dc",
+        "mobilesdk_app_id": "1:133482495823:android:3d8828f16520d9d6198f3a",
         "android_client_info": {
-          "package_name": "com.example.my_counter_app"
+          "package_name": "com.example.movie_app"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDq7jstAtipeUJOmL8Odb0irxfOhJArs3I"
+          "current_key": "AIzaSyAPBxKYRwYvR3567ULzwS_x6PTItYoJH9I"
         }
       ],
       "services": {
