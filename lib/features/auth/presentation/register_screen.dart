@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../logic/auth_cubit.dart';
 import '../logic/auth_state.dart';
-import '../../movies/presentation/home_screen.dart';
+import '../../movies/presentation/main_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -12,9 +12,8 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,72 +22,88 @@ class _RegisterScreenState extends State<RegisterScreen> {
       body: BlocListener<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is AuthSuccessState) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Account Created Successfully!')),
-            );
+            
             Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (_) => const HomeScreen()),
+              MaterialPageRoute(builder: (_) => const MainScreen()),
               (route) => false,
             );
           } else if (state is AuthErrorState) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Error: ${state.message}')),
+              SnackBar(
+                content: Text(state.message),
+                backgroundColor: Colors.redAccent,
+              ),
             );
           }
         },
         child: Padding(
           padding: const EdgeInsets.all(20.0),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextFormField(
-                  controller: _emailController,
-                  decoration: const InputDecoration(
-                    labelText: 'Email Address',
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.email),
+          child: Center(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  const Icon(
+                    Icons.person_add_alt_1_rounded,
+                    size: 80,
+                    color: Color(0xFFFFC107),
                   ),
-                  validator: (val) =>
-                      val != null && val.contains('@') ? null : 'Please enter a valid email',
-                ),
-                const SizedBox(height: 15),
-                TextFormField(
-                  controller: _passwordController,
-                  obscureText: true,
-                  decoration: const InputDecoration(
-                    labelText: 'Password',
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.lock),
-                  ),
-                  validator: (val) =>
-                      val != null && val.length >= 6 ? null : 'Password must be at least 6 characters',
-                ),
-                const SizedBox(height: 25),
-                BlocBuilder<AuthCubit, AuthState>(
-                  builder: (context, state) {
-                    if (state is AuthLoadingState) {
-                      return const CircularProgressIndicator();
-                    }
-                    return ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: const Size(double.infinity, 50),
+                  const SizedBox(height: 25),
+                  TextField(
+                    controller: _emailController,
+                    decoration: InputDecoration(
+                      labelText: 'Email',
+                      prefixIcon: const Icon(Icons.email, color: Color(0xFFFFC107)),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
                       ),
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
+                    ),
+                  ),
+                  const SizedBox(height: 15),
+                  TextField(
+                    controller: _passwordController,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      labelText: 'Password',
+                      prefixIcon: const Icon(Icons.lock, color: Color(0xFFFFC107)),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 25),
+                  BlocBuilder<AuthCubit, AuthState>(
+                    builder: (context, state) {
+                      if (state is AuthLoadingState) {
+                        return const CircularProgressIndicator(color: Color(0xFFFFC107));
+                      }
+                      return ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFFFFC107),
+                          minimumSize: const Size(double.infinity, 50),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                        ),
+                        onPressed: () {
                           context.read<AuthCubit>().register(
-                                _emailController.text.trim(),
-                                _passwordController.text.trim(),
+                                _emailController.text,
+                                _passwordController.text,
                               );
-                        }
-                      },
-                      child: const Text('Register'),
-                    );
-                  },
-                ),
-              ],
+                        },
+                        child: const Text(
+                          'Register',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),
