@@ -1,17 +1,30 @@
-# movie_app
+# Movie Discovery App (Flutter & Firebase)
 
-A new Flutter project.
+A production-ready, feature-first Flutter mobile application integrated with **TMDB API**, **Firebase Authentication**, and **Cloud Firestore** for real-time favorite movie synchronization.
+
+---
+
+## Features
+- **Firebase Authentication:** User login & registration flows.
+- **TMDB Integration:** Fetch popular movies, top 10 trends, and search in real-time.
+- **Firestore Real-time Favorites:** Synchronize added favorite movies instantaneously per user.
+- **Live Search:** Dynamic search queries with immediate poster and details presentation.
+- **Cinematic Dark UI:** Gold-accented dark theme with bottom navigation bar navigation shell.
+
+---
+
+## Tech Stack & Architecture
+- **Framework:** Flutter
+- **Architecture:** Feature-First (Auth & Movies Modules)
+- **State Management:** BLoC / Cubit
+- **HTTP Client:** Dio
+- **Backend:** Firebase Auth & Cloud Firestore
+- **Database:** TMDB REST API
+
+---
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. **Clone the repository:**
+   ```bash
+   git clone <YOUR_GITHUB_REPOSITORY_URL>
